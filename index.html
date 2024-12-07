@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Perguntas Frequentes - FAQ</title>
+  <style>
+    /* Resetando estilos padrões */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #f8f8f8, #e0e0e0);
+      color: #333;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 0 2rem;
+      transition: background-color 0.3s ease;
+    }
+
+    header {
+      background: linear-gradient(45deg, #4CAF50, #00bcd4);
+      color: white;
+      text-align: center;
+      padding: 3rem 2rem;
+      width: 100%;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      margin-top: 2rem;
+      border-radius: 8px;
+      margin-bottom: 3rem;
+      transition: transform 0.3s ease-in-out;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 0.8rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+      text-align: left;
+      flex: 1;
+    }
+
+    header .sub-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #fff;
+      text-align: right;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      margin-top: 0.5rem;
+      font-weight: 400;
+    }
+
+    #faq {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .faq-item {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .faq-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 1.8rem;
+      text-align: left;
+      background-color: #f1f1f1;
+      border: none;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      border-radius: 10px 10px 0 0;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background-color: #00bcd4;
+      color: white;
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 1.5rem;
+      background-color: #f9f9f9;
+      font-size: 1.1rem;
+      border-top: 1px solid #ddd;
+      color: #555;
+      border-radius: 0 0 10px 10px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-in-out, padding 0.3s ease;
+    }
+
+    .faq-answer.open {
+      display: block;
+      max-height: 500px;
+      padding: 1.5rem;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #333;
+      color: white;
+      padding: 1.5rem;
+      width: 100%;
+      margin-top: 3rem;
+      border-radius: 8px;
+      box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    footer p {
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+
+    .faq-question::after {
+      content: ' ▼';
+      font-weight: bold;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-answer.open + .faq-question::after {
+      transform: rotate(-180deg);
+    }
+
+    /* Estilo para o link */
+    .discord-link {
+      color: #0073e6;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .discord-link:hover {
+      color: #005bb5;
+    }
+
+    /* Efeitos para os ícones */
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .icon {
+      font-size: 1.8rem;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-question:hover .icon {
+      transform: rotate(90deg);
+    }
+
+    /* Estilo para o botão de voltar */
+    .back-btn {
+      display: inline-block;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      margin-top: 2rem;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #388e3c;
+      transform: scale(1.05);
+    }
+
+    /* Estilo de carregamento */
+    .loading {
+      font-size: 2rem;
+      margin-left: 10px;
+      display: none;
+    }
+
+    .loading.show {
+      display: inline-block;
+      animation: spin 1.5s linear infinite;
+    }
+
+    /* Animação de carregamento */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Perguntas Frequentes (FAQ)</h1>
+    <div class="sub-title">Equipe ZN Club</div>
+  </header>
+
+  <section id="faq">
+    <div class="faq-item">
+      <button class="faq-question">O que é o ZN Club? <span class="icon">➔</span></button>
+      <div class="faq-answer">
+        <p>O ZN Club é mais do que uma comunidade online – é um espaço dinâmico e acolhedor criado para pessoas que compartilham interesses em atividades exclusivas, eventos emocionantes e interações de alta qualidade. Nosso objetivo é proporcionar experiências inesquecíveis para todos os membros, com foco em diversão, amizade e crescimento. No ZN Club, você tem a oportunidade de participar de eventos temáticos, colaborar em projetos criativos e fazer novas amizades com pessoas de todo o mundo.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">Como faço para ser staff do servidor? <span class="icon">➔</span></button>
+      <div class="faq-answer">
+        <p>Para se tornar um membro da equipe do ZN Club, basta realizar o recrutamento de staff. Procure pela aba de recrutamento no servidor e siga as instruções para enviar sua aplicação. Assim, você poderá fazer parte da nossa equipe e ajudar a manter o servidor organizado e acolhedor para todos os membros.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">Como posso entrar em contato com a equipe do ZN Club? <span class="icon">➔</span></button>
+      <div class="faq-answer">
+        <p>Você pode entrar em contato com a equipe do ZN Club de duas formas:</p>
+        <ul>
+          <li>Entre no nosso <a class="discord-link" href="https://discord.gg/6q7r2C8Ze2" target="_blank">Discord</a> para falar com a equipe diretamente.</li>
+          <li>Ou envie uma mensagem direta para algum dos nossos suportes através do site ou plataforma preferida.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <a href="https://discord.gg/6q7r2C8Ze2" class="back-btn" id="back-btn">
+    Voltar para o servidor
+    <span class="loading" id="loading">🔄</span>
+  </a>
+
+  <footer>
+    <p>&copy; 2024 ZN Club. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    // Adicionando funcionalidade para exibir e ocultar as respostas ao clicar nas perguntas
+    const faqQuestions = document.querySelectorAll('.faq-question');
+
+    faqQuestions.forEach(question => {
+      question.addEventListener('click', () => {
+        const answer = question.nextElementSibling;
+        answer.classList.toggle('open');
+      });
+    });
+
+    // Função para o botão de voltar
+    const backButton = document.getElementById('back-btn');
+    const loadingIndicator = document.getElementById('loading');
+
+    backButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      loadingIndicator.classList.add('show');
+      setTimeout(function() {
+        window.location.href = backButton.href; // Redireciona após o "carregamento"
+      }, 2000); // Simula um carregamento de 2 segundos
+    });
+  </script>
+</body>
+</html>
